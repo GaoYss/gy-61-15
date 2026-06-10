@@ -84,7 +84,7 @@ export function Dashboard({ data }) {
         <div className="method-bars">
           {data.stats.logs_by_method.map((item) => (
             <div className="method-row" key={item.credential_method}>
-              <span>{item.credential_method}</span>
+              <span>{item.credential_method_display}</span>
               <div>
                 <i style={{ width: `${Math.max(item.count * 24, 12)}px` }} />
               </div>
