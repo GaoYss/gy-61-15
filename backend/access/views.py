@@ -92,7 +92,11 @@ class StatsView(APIView):
                         ).get_credential_method_display(),
                         "count": row["count"],
                     }
-                    for row in DoorOpenLog.objects.values("credential_method")
+                    for row in DoorOpenLog.objects.filter(
+                        result=DoorOpenLog.Result.SUCCESS,
+                        opened_at__date=today,
+                    )
+                    .values("credential_method")
                     .annotate(count=Count("id"))
                     .order_by("credential_method")
                 ],

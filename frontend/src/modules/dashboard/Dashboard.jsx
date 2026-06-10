@@ -11,6 +11,10 @@ export function Dashboard({ data }) {
 
   const latestAlarms = data.alarms.slice(0, 3);
   const latestLogs = data.logs.slice(0, 5);
+  const maxMethodCount = data.stats.logs_by_method.reduce(
+    (max, item) => Math.max(max, item.count),
+    0
+  );
 
   return (
     <section className="view-stack">
@@ -82,15 +86,19 @@ export function Dashboard({ data }) {
           <h2>通行方式统计</h2>
         </div>
         <div className="method-bars">
-          {data.stats.logs_by_method.map((item) => (
-            <div className="method-row" key={item.credential_method}>
-              <span>{item.credential_method_display}</span>
-              <div>
-                <i style={{ width: `${Math.max(item.count * 24, 12)}px` }} />
+          {data.stats.logs_by_method.length ? (
+            data.stats.logs_by_method.map((item) => (
+              <div className="method-row" key={item.credential_method}>
+                <span>{item.credential_method_display}</span>
+                <div>
+                  <i style={{ width: `${Math.max((item.count / maxMethodCount) * 100, 4)}%` }} />
+                </div>
+                <strong>{item.count}</strong>
               </div>
-              <strong>{item.count}</strong>
-            </div>
-          ))}
+            ))
+          ) : (
+            <EmptyState />
+          )}
         </div>
       </div>
     </section>
