@@ -83,7 +83,8 @@ export function Dashboard({ data }) {
       <div className="panel">
         <div className="panel-title">
           <Router size={18} />
-          <h2>通行方式统计</h2>
+          <h2>今日通行方式分布</h2>
+          <span className="muted-hint">仅今日成功开门</span>
         </div>
         <div className="method-bars">
           {data.stats.logs_by_method.length ? (
@@ -93,7 +94,7 @@ export function Dashboard({ data }) {
                 <div>
                   <i style={{ width: `${Math.max((item.count / maxMethodCount) * 100, 4)}%` }} />
                 </div>
-                <strong>{item.count}</strong>
+                <strong>今日 {item.count} 次</strong>
               </div>
             ))
           ) : (

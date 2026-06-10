@@ -173,6 +173,13 @@ select {
   font-size: 17px;
 }
 
+.muted-hint {
+  font-size: 12px;
+  color: #8a94a6;
+  font-weight: normal;
+  margin-left: auto;
+}
+
 .compact-list,
 .timeline,
 .alarm-list {
